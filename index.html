@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body {background-color: #D3D3D3;}
+h2  {color: #800000;
+	  text-align:left;
+	  box-sizing: border-box;	}
+	  
+#InDigits {
+  width: 20%;
+  padding: 5px 10px;
+  margin: 3px 0;
+  box-sizing: border-box;
+}
+#Sub{
+background-color: black;
+  border: none;
+  color: white;
+  padding: 6px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 13px;
+  
+  cursor: pointer;
+}
+
+h3   {color: black;
+	  text-align:left;	}
+</style>
+</head>
+<body>
+<h2> Salary Records</h2>
+<form name="Type Salary here" action="PrintS" method="post">
+
+<h5>Salary in Rs.</h5>
+<input type="number" rquired name ="num1" id="InDigits" min="0.1" step=".01" onkeyup="myFunction()"> </br>  </br> </br>
+
+
+<button type="submit"  id="Sub" onclick="return VldtFrm()"  >Submit</button></br></br>
+<button type="button"  id="view" name ="list" onclick="ShowData()"  >View</button>
+</br></br>
+
+<span id="InWords">
+	
+</span><br><br>
+
+<span id="DataStr">
+	
+</span><br><br>
+
+</form>
+
+
+</html>
+
+<script>
+
+function ShowData(){
+	
+	document.getElementById("DataStr").innerHTML = html;
+}
+
+var DataStr = getParameterByName('resultStr');
+const arr = DataStr.split("$");
+
+var html = "<table border='2|1'>";
+for (var i = 0; i < arr.length; i++) {
+    html+="<tr>";
+    html+="<td>"+arr[i]+"</td>";
+    html+="</tr>";
+}
+html+="</table>";
+
+function myFunction(){
+	document.getElementById('InWords').innerHTML="";
+	document.getElementById('DataStr').innerHTML="";
+}
+
+function VldtFrm(){
+	var R= document.forms["Type Salary here"]["num1"].value;
+	
+	if(R=="" )
+	{
+		alert("Please Fill Salary in Rupees");
+		document.getElementById("InDigits").focus();
+		return false;
+	}
+	}
+
+
+function getParameterByName(name, url = window.location.href) {
+    name = name.replace(/[\[\]]/g, '\\$&');
+    var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+        results = regex.exec(url);
+    return decodeURIComponent(results[2].replace(/\+/g, ' '));
+    
+    
+}
+var InWords = getParameterByName('InWords');
+var InDigits = getParameterByName('InDigits');
+
+
+
+
+
+//var ViewInfo = getParameterByName('ViewInfo');
+
+//document.getElementById('ViewInfo').innerHTML=ViewInfo;
+document.getElementById('InWords').innerHTML=InWords;
+document.getElementById('InDigits').value=InDigits;
+
+
+
+
+</script>
